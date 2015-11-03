@@ -1,4 +1,4 @@
-echo Setting http_proxy, https_proxy and ftp_proxy to http://127.0.0.1:3128 ...
+echo "Setting http_proxy, https_proxy and ftp_proxy to http://127.0.0.1:3128 ..."
 http_proxy=http://127.0.0.1:3128
 https_proxy=http://127.0.0.1:3128
 ftp_proxy=http://127.0.0.1:3128

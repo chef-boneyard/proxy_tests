@@ -7,29 +7,28 @@ This repository contains the tests we do to find out whether proxies work with v
 1. Install VirtualBox and Vagrant.
 2. vagrant up
 
-# Tests
+# Running Tests
 
-To run a test, decide on a test, proxy, and configuration, and call `run_test.sh`. For example, to run the install_sh against a real proxy with :
+To run all tests, run `run_tests.sh` with no arguments:
 
 ```ruby
-vagrant ssh -c "sudo sh /opt/proxy_tests/files/default/run_test.sh install_sh no_proxy env_http_only"
+vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh"
 ```
 
-The list of proxy types are in /opt/proxy_tests/files/default/proxies. They include:
+To run one test or one set of tests, add arguments of the form `run_tests.sh TEST PROXY CONFIGURATION`. Wildcards are allowed. For example:
 
-- single (http, https and ftp are all the same proxy)
-- separate (http, https and ftp are all separate proxies)
-- none (proxy is shut down)
+```ruby
+# Run just the single-proxy install.sh test, with all env variables set
+vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh install_sh single env"
+# Run all install_sh tests
+vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh install_sh"
+```
 
-The list of configuration types are in /opt/proxy_tests/files/default/<proxy type>/configurations. They assume environment variables will be set by the proxy that will allow them to do their configuration correctly.
-
-The list of tests are in /opt/proxy_tests/files/tests. Tests include:
-
-- install_sh (runs `curl https://www.chef.io/chef/install.sh | bash -S`)
-
-## Proxies
-
-The To bring up different proxy configurations, run one of the proxy start.sh scripts:
-
-1. Single Proxy Handling Everything: `vagrant ssh -c "sudo sh /opt/proxy_tests/files/default/single_proxy/start.sh`
-2. No Proxy: `vagrant ssh -c "sudo sh /opt/proxy_tests/files/default/no_proxy/start.sh`
+```ruby
+# Run just the single-proxy install.sh test, with all env variables set
+vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh install_sh single env"
+# Run all tests against the single-proxy
+vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh \* single"
+# Run all tests that set all environment variables, no matter what the proxy
+vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh \* \* env"
+```
