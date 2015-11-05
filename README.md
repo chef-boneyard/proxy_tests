@@ -12,16 +12,16 @@ This repository contains the tests we do to find out whether proxies work with v
 To run all tests, run `run_tests.sh` with no arguments:
 
 ```ruby
-vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh"
+vagrant ssh -c "sudo /opt/proxy_tests/files/default/run_tests.sh"
 ```
 
 To run one test or one set of tests, add arguments of the form `run_tests.sh TEST PROXY CONFIGURATION`. Wildcards are allowed. For example:
 
 ```ruby
 # Run just the single-proxy install.sh test, with all env variables set
-vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh install_sh single env"
+vagrant ssh -c "sudo /opt/proxy_tests/files/default/run_tests.sh install_sh single env"
 # Run all install_sh tests
-vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh install_sh"
+vagrant ssh -c "sudo /opt/proxy_tests/files/default/run_tests.sh install_sh"
 ```
 
 ```ruby
