@@ -1,0 +1,45 @@
+{
+  "create": {
+    "actors": [
+      "pivotal",
+      "client-creator"
+    ],
+    "groups": [
+      "admins"
+    ]
+  },
+  "read": {
+    "actors": [
+      "pivotal"
+    ],
+    "groups": [
+      "admins",
+      "users"
+    ]
+  },
+  "update": {
+    "actors": [
+      "pivotal"
+    ],
+    "groups": [
+      "admins"
+    ]
+  },
+  "delete": {
+    "actors": [
+      "pivotal"
+    ],
+    "groups": [
+      "admins",
+      "users"
+    ]
+  },
+  "grant": {
+    "actors": [
+      "pivotal"
+    ],
+    "groups": [
+      "admins"
+    ]
+  }
+}

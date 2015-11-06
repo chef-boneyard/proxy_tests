@@ -32,3 +32,22 @@ vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh \* single"
 # Run all tests that set all environment variables, no matter what the proxy
 vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh \* \* env"
 ```
+
+### Results
+
+The results so far:
+
+| Test        | Configuration    | Result    |
+|-------------|------------------|-----------|
+| berkshelf   | env vars         | succeeded |
+| chef_client | env vars         | succeeded |
+| install_sh  | env vars         | succeeded |
+| kitchen     | env vars         | succeeded |
+| berkshelf   | env vars (upper) | succeeded |
+| chef_client | env vars (upper) | succeeded |
+| install_sh  | env vars (upper) | succeeded |
+| kitchen     | env vars (upper) | succeeded |
+| berkshelf   | no_proxy         | failed    |
+| chef_client | no_proxy         | failed    |
+| install_sh  | no_proxy         | succeeded |
+| kitchen     | no_proxy         | succeeded |

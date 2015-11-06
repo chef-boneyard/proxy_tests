@@ -1,5 +1,5 @@
 #!/bin/sh
 # Stop squid
-service squid stop
+run_cmd service squid stop
 # Allow all traffic
-iptables -F OUTPUT
+run_cmd iptables -F OUTPUT

@@ -17,23 +17,23 @@ source $PROXY_TESTS_DIR/files/default/utils.sh
 # Make any failing command fail the whole thing
 set -e
 
-for test_script in $PROXY_TESTS_DIR/files/default/tests/$TESTS.sh
+for proxy_dir in $PROXY_TESTS_DIR/files/default/proxies/$PROXIES
 do
-  TEST="$(basename ${test_script%%.*})"
+  PROXY="$(basename $proxy_dir)"
   echo ""
-  echo "===================="
-  echo "Test $TEST"
-  echo "===================="
+  echo "========================================"
+  echo "Test $TEST - Proxy $PROXY"
+  echo "========================================"
+  echo "Running $proxy_dir/start.sh ..."
+  source $proxy_dir/start.sh
 
-  for proxy_dir in $PROXY_TESTS_DIR/files/default/proxies/$PROXIES
+  for test_script in $PROXY_TESTS_DIR/files/default/tests/$TESTS.sh
   do
-    PROXY="$(basename $proxy_dir)"
+    TEST="$(basename ${test_script%%.*})"
     echo ""
-    echo "========================================"
-    echo "Test $TEST - Proxy $PROXY"
-    echo "========================================"
-    echo "Running $proxy_dir/start.sh ..."
-    source $proxy_dir/start.sh
+    echo "===================="
+    echo "Test $TEST"
+    echo "===================="
 
     for configuration_script in $PROXY_TESTS_DIR/files/default/proxies/$PROXY/configurations/$CONFIGURATIONS.sh
     do
