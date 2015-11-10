@@ -22,7 +22,7 @@ do
   PROXY="$(basename $proxy_dir)"
   echo ""
   echo "========================================"
-  echo "Test $TEST - Proxy $PROXY"
+  echo "Proxy $PROXY"
   echo "========================================"
   echo "Running $proxy_dir/start.sh ..."
   source $proxy_dir/start.sh
@@ -32,7 +32,7 @@ do
     TEST="$(basename ${test_script%%.*})"
     echo ""
     echo "===================="
-    echo "Test $TEST"
+    echo "Proxy $PROXY - Test $TEST"
     echo "===================="
 
     for configuration_script in $PROXY_TESTS_DIR/files/default/proxies/$PROXY/configurations/$CONFIGURATIONS.sh
