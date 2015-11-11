@@ -17,7 +17,7 @@ source $PROXY_TESTS_DIR/files/default/utils.sh
 # Make any failing command fail the whole thing
 set -e
 
-for proxy_dir in $PROXY_TESTS_DIR/files/default/proxies/$PROXIES
+for proxy_dir in $PROXY_TESTS_DIR/files/darwin/proxies/$PROXIES
 do
   PROXY="$(basename $proxy_dir)"
   echo ""
@@ -29,7 +29,7 @@ do
 
   for test_script in $PROXY_TESTS_DIR/files/default/tests/$TESTS.sh
   do
-    TEST="$(basename ${test_script%%.*})"
+    TEST="$(basename $test_script)"
     echo ""
     echo "===================="
     echo "Proxy $PROXY - Test $TEST"
@@ -37,7 +37,7 @@ do
 
     for configuration_script in $PROXY_TESTS_DIR/files/default/proxies/$PROXY/configurations/$CONFIGURATIONS.sh
     do
-      CONFIGURATION="$(basename ${configuration_script%%.*})"
+      CONFIGURATION="$(basename $configuration_script)"
       echo ""
       echo "============================================================"
       echo "Test $TEST - Proxy $PROXY - Configuration $CONFIGURATION"
