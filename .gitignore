@@ -45,3 +45,10 @@ vendor/
 .vagrant/
 .vagrant.d/
 .kitchen/
+
+# chef repo stuff
+/nodes/
+/clients/
+
+# place to put tests
+/tests/
