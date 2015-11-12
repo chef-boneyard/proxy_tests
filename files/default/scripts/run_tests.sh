@@ -7,17 +7,16 @@ RESULTS_FILE=$4
 # Print out header to results file
 [ $RESULTS_FILE ] && (echo "# Test,Proxy,Configuration,Result" > $RESULTS_FILE)
 
-# Find where PROXY_TESTS_DIR is being run from
-PROXY_TESTS_DIR="${PROXY_TESTS_DIR:-$(dirname $(dirname $(dirname $0)))}"
+PROXY_TESTS_DIR=$(dirname $0)
 echo "Running tests from $PROXY_TESTS_DIR ..."
 
 # Bring in the utility functions
-source $PROXY_TESTS_DIR/files/default/utils.sh
+source $PROXY_TESTS_DIR/utils.sh
 
 # Make any failing command fail the whole thing
 set -e
 
-for proxy_dir in $PROXY_TESTS_DIR/files/darwin/proxies/$PROXIES
+for proxy_dir in $PROXY_TESTS_DIR/proxies/$PROXIES
 do
   PROXY="$(basename $proxy_dir)"
   echo ""
@@ -27,17 +26,17 @@ do
   echo "Running $proxy_dir/start.sh ..."
   source $proxy_dir/start.sh
 
-  for test_script in $PROXY_TESTS_DIR/files/default/tests/$TESTS.sh
+  for test_script in $PROXY_TESTS_DIR/tests/$TESTS.sh
   do
-    TEST="$(basename $test_script)"
+    TEST="$(basename $test_script%%.*)"
     echo ""
     echo "===================="
     echo "Proxy $PROXY - Test $TEST"
     echo "===================="
 
-    for configuration_script in $PROXY_TESTS_DIR/files/default/proxies/$PROXY/configurations/$CONFIGURATIONS.sh
+    for configuration_script in $PROXY_TESTS_DIR/proxies/$PROXY/configurations/$CONFIGURATIONS.sh
     do
-      CONFIGURATION="$(basename $configuration_script)"
+      CONFIGURATION="$(basename $configuration_script%%.*)"
       echo ""
       echo "============================================================"
       echo "Test $TEST - Proxy $PROXY - Configuration $CONFIGURATION"
