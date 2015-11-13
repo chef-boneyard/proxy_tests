@@ -4,7 +4,7 @@ run_cmd service squid stop
 
 # Make the right config file
 echo "Copying squid configuration ..."
-run_cmd cp /opt/proxy_tests/files/default/proxies/single/squid.conf /etc/squid/squid.conf
+run_cmd cp $PROXY_TESTS_DIR/files/default/proxies/single/squid.conf /etc/squid/squid.conf
 
 # Deny all traffic except squid
 echo "Setting routes to deny all traffic except ssh and squid ..."

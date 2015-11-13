@@ -1,4 +1,7 @@
 # Install chefdk if needed
+PROXY_TESTS_DIR=$(dirname $0)
+source $PROXY_TESTS_DIR/utils.sh
+
 echo "Installing chefdk (if needed) ..."
 run_cmd curl https://omnitruck.chef.io/install.sh > /tmp/install.sh
 run_cmd sudo -E bash /tmp/install.sh -P chefdk

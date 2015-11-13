@@ -1,4 +1,5 @@
 #!/bin/sh
+PROXY_TESTS_DIR=$(dirname $0)
 
 # Install Squid through Homebrew
 brew install squid
@@ -6,4 +7,4 @@ ln -sfv /usr/local/opt/squid/*.plist ~/Library/LaunchAgents
 mkdir -p /usr/local/var/cache/squid
 mkdir -p /usr/local/var/logs
 
-sudo bash /opt/proxy_tests/files/default/install_chefdk.sh
+sudo bash $PROXY_TESTS_DIR/install_chefdk.sh
