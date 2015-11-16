@@ -1,0 +1,21 @@
+sudo: false
+addons:
+  apt:
+    sources:
+      - chef-current-precise
+    packages:
+      - chefdk
+      - squid
+
+# Ensure we make ChefDK's Ruby the default
+before_script:
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+
+env:
+  PROXY_TESTS_DIR=/tmp/proxy_tests
+
+script:
+  - chef-client --version
+  - chef-client -z -o proxy_tests::render
+  - sh /tmp/proxy_tests/setup.sh
+  - sh /tmp/proxy_tests/run_tests.sh chef_client single env
