@@ -10,4 +10,4 @@ run_cmd knife node create $AUTH_ARGS $TEST_CLIENT_NAME -d
 
 # Run chef-client
 echo "Running chef-client ..."
-run_cmd timeout 120 chef-client -c $PROXY_TESTS_REPO/.chef/knife.rb -N $TEST_CLIENT_NAME -k /tmp/client.pem -o test || PROXY_TEST_RESULT=failed
+run_cmd timeout 120 chef-client -c $PROXY_TESTS_REPO/.chef/knife.rb -N $TEST_CLIENT_NAME --client_key /tmp/client.pem -o test || PROXY_TEST_RESULT=failed
