@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 PROXY_TESTS_DIR=$(dirname $0)
 
 # Install Squid through Homebrew

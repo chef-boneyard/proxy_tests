@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "Stopping squid ..."
 launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.squid.plist
 
