@@ -29,7 +29,7 @@ script:
   - chef-client --version
   - chef-client -z -o proxy_tests::render
   #- sh /tmp/proxy_tests/setup.sh
-  - sudo -E bash /tmp/proxy_tests/run_tests.sh chef_client single env /tmp/out.txt
+  - sudo -E bash /tmp/proxy_tests/run_tests.sh \* \* \* /tmp/out.txt
 
 after_script:
   - cat /tmp/out.txt
