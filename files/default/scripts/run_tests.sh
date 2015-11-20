@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 TESTS="${1:-*}"
 PROXIES="${2:-*}"
 CONFIGURATIONS="${3:-*}"
@@ -11,7 +11,7 @@ PROXY_TESTS_DIR=$(dirname $0)
 echo "Running tests from $PROXY_TESTS_DIR ..."
 
 # Bring in the utility functions
-source $PROXY_TESTS_DIR/utils.sh
+. $PROXY_TESTS_DIR/utils.sh
 
 # Make any failing command fail the whole thing
 set -e
@@ -24,7 +24,7 @@ do
   echo "Proxy $PROXY"
   echo "========================================"
   echo "Running $proxy_dir/start.sh ..."
-  source $proxy_dir/start.sh
+  . $proxy_dir/start.sh
 
   for test_script in $PROXY_TESTS_DIR/tests/$TESTS.sh
   do
@@ -42,13 +42,13 @@ do
       echo "Test $TEST - Proxy $PROXY - Configuration $CONFIGURATION"
       echo "============================================================"
       echo "Running $configuration_script ..."
-      source $configuration_script
+      . $configuration_script
 
       echo "Running $test_script ..."
       PROXY_TEST_RESULT=succeeded
       # Turn off immediate-error-exiting for the duration of the test
       set +e
-      source $test_script
+      . $test_script
       set -e
       echo ""
       echo ">>>>>>> $PROXY_TEST_RESULT"

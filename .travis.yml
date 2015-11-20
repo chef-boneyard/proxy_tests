@@ -1,11 +1,22 @@
-sudo: false
+sudo: required
+dist: trusty
+os:
+  - linux
+  #- osx
+
 addons:
   apt:
     sources:
-      - chef-current-precise
+      # later we can test with current, now we want stable
+      #- chef-current-precise
+      - chef-stable-precise
     packages:
       - chefdk
-      - squid
+      #- git
+      #- squid
+
+before_install:
+  - sudo apt-get -y install squid3 git
 
 # Ensure we make ChefDK's Ruby the default
 before_script:
@@ -17,5 +28,8 @@ env:
 script:
   - chef-client --version
   - chef-client -z -o proxy_tests::render
-  - sh /tmp/proxy_tests/setup.sh
-  - sh /tmp/proxy_tests/run_tests.sh chef_client single env
+  #- sh /tmp/proxy_tests/setup.sh
+  - sudo -E bash /tmp/proxy_tests/run_tests.sh chef_client single env /tmp/out.txt
+
+after_script:
+  - cat /tmp/out.txt

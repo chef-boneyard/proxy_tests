@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 run_cmd rm -rf /opt/chef
 
 echo "Grabbing install.sh ..."

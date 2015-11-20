@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "Clearing chef package with yum erase -y chef (if it's already there) ... "
 run_cmd yum erase -y chef
 
