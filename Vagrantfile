@@ -6,5 +6,5 @@ Vagrant.configure(2) do |config|
 
   config.vm.synced_folder ".", "/opt/proxy_tests", create: true
 
-  #config.vm.provision "shell", inline: "/opt/proxy_tests/files/default/scripts/setup.sh"
+  config.vm.provision "shell", inline: "sudo apt-get update"
 end
