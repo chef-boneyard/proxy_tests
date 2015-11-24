@@ -4,32 +4,45 @@ os:
   - linux
   #- osx
 
-addons:
-  apt:
-    sources:
-      # later we can test with current, now we want stable
-      #- chef-current-precise
-      - chef-stable-precise
-    packages:
-      - chefdk
-      #- git
-      #- squid
-
 before_install:
   - sudo apt-get -y install squid3 git
 
-# Ensure we make ChefDK's Ruby the default
-before_script:
-  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-
 env:
-  PROXY_TESTS_DIR=/tmp/proxy_tests
+  global: PROXY_TESTS_DIR=/tmp/proxy_tests
 
-script:
-  - chef-client --version
-  - chef-client -z -o proxy_tests::render
-  #- sh /tmp/proxy_tests/setup.sh
-  - sudo -E bash /tmp/proxy_tests/run_tests.sh \* \* \* /tmp/out.txt
+script: exclude_me
+
+matrix:
+  # We only want to include the things that are in include--no default build here.
+  exclude:
+    script: exclude_me
+  include:
+    # Run against the chefdk
+    - addons:
+        apt:
+          sources:
+            # later we can test with current, now we want stable
+            #- chef-current-precise
+            - chef-stable-precise
+          packages:
+            - chefdk
+      before_script:
+        - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+      script:
+        - chef-client --version
+        - chef-client -z -o proxy_tests::render
+        #- sh /tmp/proxy_tests/setup.sh
+        - sudo -E bash /tmp/proxy_tests/run_tests.sh \* \* \* /tmp/out.txt
+
+    # Run against master of chef
+    - script:
+        - git clone git@github.com:chef/chef
+        - export BUNDLE_GEMFILE=chef/Gemfile
+        - bundle install
+        - bundle exec chef-client --version
+        - bundle exec chef-client -z -o proxy_tests::render
+        #- sh /tmp/proxy_tests/setup.sh
+        - bundle exec sudo -E bash /tmp/proxy_tests/run_tests.sh chef_client \* \* /tmp/out.txt
 
 after_script:
   - cat /tmp/out.txt
