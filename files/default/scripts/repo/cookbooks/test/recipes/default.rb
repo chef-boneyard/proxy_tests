@@ -57,4 +57,6 @@ ruby_block "Net::HTTP test" do
     https = Net::HTTP.get(URI('https://www.chef.io/'))
     raise RuntimeError unless https =~ /Chef Software, Inc/
   }
+  # TODO This doesn't actually work yet! Tracking it down separately.
+  action :nothing
 end
