@@ -1,8 +1,7 @@
 {
   "create": {
     "actors": [
-      "pivotal",
-      "client-creator"
+      "pivotal"
     ],
     "groups": [
       "admins"
@@ -31,8 +30,7 @@
       "pivotal"
     ],
     "groups": [
-      "admins",
-      "users"
+      "admins"
     ]
   },
   "grant": {

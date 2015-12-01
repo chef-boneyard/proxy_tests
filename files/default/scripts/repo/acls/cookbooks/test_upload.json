@@ -1,11 +1,11 @@
 {
   "create": {
     "actors": [
-      "pivotal",
-      "client-creator"
+      "pivotal"
     ],
     "groups": [
-      "admins"
+      "admins",
+      "users"
     ]
   },
   "read": {
@@ -15,15 +15,18 @@
     ],
     "groups": [
       "admins",
+      "clients",
       "users"
     ]
   },
   "update": {
     "actors": [
+      "client-creator",
       "pivotal"
     ],
     "groups": [
-      "admins"
+      "admins",
+      "users"
     ]
   },
   "delete": {
