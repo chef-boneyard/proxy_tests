@@ -16,7 +16,7 @@ addons:
       #- squid
 
 before_install:
-  - sudo apt-get -y install squid3 git
+  - sudo apt-get -y install squid3 git curl wget
 
 # Ensure we make ChefDK's Ruby the default
 before_script:

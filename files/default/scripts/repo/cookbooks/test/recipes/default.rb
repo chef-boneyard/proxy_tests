@@ -45,18 +45,29 @@ gem_package 'retryable' do
   version '1.2.1'
 end
 
-# TODO does execute run a remote script?
+execute "curl works" do
+  command "curl 'https://omnitruck.chef.io/install.sh' -d /tmp/test/curl.out"
+end
 
+execute "wget works" do
+  command "wget 'https://omnitruck.chef.io/install.sh' -o /tmp/test/wget.out"
+end
+
+# https://www.jethrocarr.com/2014/08/14/ruby-nethttp-proxies/
+# Must use `Net::HTTP.new` to get environment variables
 ruby_block "Net::HTTP test" do
   block {
     puts ENV.inspect
     require 'net/http'
     require 'uri'
-    http = Net::HTTP.get(URI('http://chef.io/'))
-    raise RuntimeError unless http =~ /301/
-    https = Net::HTTP.get(URI('https://www.chef.io/'))
-    raise RuntimeError unless https =~ /Chef Software, Inc/
+    uri       = URI('http://www.chef.io/')
+    request   = Net::HTTP.new(uri.host, uri.port)
+    response  = request.get(uri)
+    raise RuntimeError unless response.response.code.to_i == 301
+    uri       = URI('https://www.chef.io/')
+    request   = Net::HTTP.new(uri.host, uri.port)
+    request.use_ssl = true
+    response  = request.get(uri)
+    raise RuntimeError unless response.body =~ /Chef Software, Inc/
   }
-  # TODO This doesn't actually work yet! Tracking it down separately.
-  action :nothing
 end
