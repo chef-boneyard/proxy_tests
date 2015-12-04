@@ -16,4 +16,4 @@ run_cmd iptables -A OUTPUT -j ACCEPT
 
 echo "Starting squid ..."
 run_cmd service squid3 start
-sleep 2
+sleep 60
