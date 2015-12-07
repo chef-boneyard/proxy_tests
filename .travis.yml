@@ -23,7 +23,8 @@ before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
 
 env:
-  PROXY_TESTS_DIR=/tmp/proxy_tests
+  - PROXY_TESTS_DIR=/tmp/proxy_tests
+  - PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
 
 script:
   - chef-client --version

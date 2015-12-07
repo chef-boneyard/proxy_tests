@@ -1,6 +1,5 @@
 #!/bin/bash
 
-PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
 AUTH_ARGS="-c $PROXY_TESTS_REPO/.chef/knife.rb -u client-creator --key $PROXY_TESTS_REPO/.chef/client-creator.pem"
 TEST_CLIENT_NAME=test_client
 
