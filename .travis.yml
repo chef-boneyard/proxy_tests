@@ -8,11 +8,11 @@ addons:
   apt:
     sources:
       # later we can test with current, now we want stable
-      #- chef-current-precise
-      - chef-stable-precise
+      - chef-current-precise
+      #- chef-stable-precise
     packages:
-      #- chefdk
-      - git
+      - chefdk
+      #- git
       #- squid
 
 before_install:
@@ -29,10 +29,9 @@ env:
 
 script:
   - chef-client --version
-  - sudo -E bash $PROXY_TESTS_DIR/run_tests.sh chef_client \* \* /tmp/out.txt
+  - sudo -E bash $PROXY_TESTS_DIR/run_tests.sh \* \* \* /tmp/out.txt
 
 after_script:
-  - sudo cat /usr/bin/knife
   - cat /tmp/out.txt
   - sudo cat /var/log/squid3/cache.log
   - sudo cat /var/log/squid3/access.log
