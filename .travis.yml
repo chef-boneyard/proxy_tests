@@ -8,8 +8,8 @@ addons:
   apt:
     sources:
       # later we can test with current, now we want stable
-      #- chef-current-precise
-      - chef-stable-precise
+      - chef-current-precise
+      #- chef-stable-precise
     packages:
       - chefdk
       #- git
@@ -33,3 +33,5 @@ script:
 
 after_script:
   - cat /tmp/out.txt
+  - sudo cat /var/log/squid3/cache.log
+  - sudo cat /var/log/squid3/access.log

@@ -7,7 +7,6 @@ chef_server_url          "https://api.chef.io/organizations/chef_proxy_tests"
 # Then single tests or configurations can call this if they want to
 # set these configs.  It assumes we are using the local squid proxy.
 def set_proxy_config
-  puts "Setting the chef http_proxy configs"
   http_proxy "http://127.0.0.1:3128"
   https_proxy "http://127.0.0.1:3128"
 end
