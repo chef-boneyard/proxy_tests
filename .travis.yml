@@ -24,11 +24,16 @@ before_script:
 
 env:
   global:
-    - PROXY_TESTS_DIR=files/default/scripts
+    - PROXY_TESTS_DIR=/tmp/proxy_tests
     - PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
 
 script:
   - chef-client --version
+  # We render the files for the test specifically for the sake of the Berkshelf
+  # tests, since we need to write out a config.json that includes the absolute
+  # path to a client key, but we don't know the $PROXY_TESTS_REPO path until
+  # this runs.
+  - chef-client -z -o proxy_tests::render
   - sudo -E bash $PROXY_TESTS_DIR/run_tests.sh \* \* \* /tmp/out.txt
 
 after_script:
