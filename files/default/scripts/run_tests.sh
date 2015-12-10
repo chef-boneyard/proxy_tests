@@ -14,7 +14,7 @@ echo "Running tests from $PROXY_TESTS_DIR ..."
 . $PROXY_TESTS_DIR/utils.sh
 
 test_is_pending() {
-  echo "test_is_pending $1 $2 $3"
+  #echo "test_is_pending $1 $2 $3"
   [[ $1 == "berkshelf" || ( $1 == "chef_client" && $3 == "no_proxy" ) || ( $1 == "install_sh" && $3 == "env_upper") || ( $1 == "chef_client" && $2 == "single" && $3 == "env_upper" ) || ( $1 != "chef_client" && $3 == "client_rb" ) ]]
 }
 
