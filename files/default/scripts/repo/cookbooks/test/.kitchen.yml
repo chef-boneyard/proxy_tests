@@ -1,0 +1,35 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: proxy_tests
+  region: us-west-2
+  availability_zone: a
+  instance_type: m3.medium
+  image_id: ami-e54f5f84 # us-west-2, ebs
+  tags:
+    created_by: test-kitchen
+    owned_by: proxy_tests - delete me
+
+provisioner:
+  require_chef_omnibus: "12.5.1"
+  name: chef_zero
+
+transport:
+  ssh_key: ../../.chef/keys/proxy_tests.pem
+  username: ubuntu
+
+platforms:
+  - name: ubuntu-14.04
+
+verifier:
+  name: busser
+
+suites:
+  # We run a different test based upon the configuration - basically each TK
+  # test asserts that the expected configuration is transfered to the target
+  # machine
+  - name: default
+    run_list:
+      - recipe[test::tk_<%= ENV['TK_SUITE_NAME'] %>_test]
+  # TODO a machine which doesn't setup squid and doesn't copy across
+  # proxy settings

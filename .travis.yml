@@ -29,6 +29,8 @@ env:
 
 script:
   - chef-client --version
+  # We need these gems to test Test Kitchen proxy connectivity
+  - chef gem install "kitchen-ec2"
   # We render the files for the test specifically for the sake of the Berkshelf
   # tests, since we need to write out a config.json that includes the absolute
   # path to a client key, but we don't know the $PROXY_TESTS_REPO path until

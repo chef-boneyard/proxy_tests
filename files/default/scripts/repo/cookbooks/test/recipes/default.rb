@@ -1,35 +1,36 @@
-# Purge the /tmp/test directory
-directory '/tmp/test' do
+# Purge the /tmp/test_proxy_dir directory
+directory '/tmp/test_proxy_dir' do
   action :delete
   recursive true
 end
-directory '/tmp/test'
+directory '/tmp/test_proxy_dir'
 
 # https
-remote_file '/tmp/test/https.txt' do
+remote_file '/tmp/test_proxy_dir/https.txt' do
   source 'https://raw.githubusercontent.com/chef/chef/master/.rspec'
 end
 
 # http
-remote_file '/tmp/test/http.txt' do
+remote_file '/tmp/test_proxy_dir/http.txt' do
   source 'http://ftp.gnu.org/welcome.msg'
 end
 
 # ftp
-# remote_file '/tmp/test/ftp.txt' do
+# remote_file '/tmp/test_proxy_dir/ftp.txt' do
 #   source 'ftp://ftp.gnu.org/welcome.msg'
 # end
 
 # git
-git '/tmp/test/sudo' do
+package "git"
+git '/tmp/test_proxy_dir/sudo' do
   repository 'https://github.com/chef-cookbooks/sudo.git'
 end
 
 package "subversion"
 
 # SVN
-directory '/tmp/test/couchdb'
-subversion '/tmp/test/couchdb' do
+directory '/tmp/test_proxy_dir/couchdb'
+subversion '/tmp/test_proxy_dir/couchdb' do
   repository 'http://svn.apache.org/repos/asf/couchdb/trunk'
   # The subversion resource doesn't respect env variables right now
   # TODO fix this
@@ -46,11 +47,11 @@ gem_package 'retryable' do
 end
 
 execute "curl works" do
-  command "curl 'https://omnitruck.chef.io/install.sh' -d /tmp/test/curl.out"
+  command "curl 'https://omnitruck.chef.io/install.sh' -d /tmp/test_proxy_dir/curl.out"
 end
 
 execute "wget works" do
-  command "wget 'https://omnitruck.chef.io/install.sh' -o /tmp/test/wget.out"
+  command "wget 'https://omnitruck.chef.io/install.sh' -o /tmp/test_proxy_dir/wget.out"
 end
 
 # https://www.jethrocarr.com/2014/08/14/ruby-nethttp-proxies/

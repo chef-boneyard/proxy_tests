@@ -7,3 +7,5 @@ FTP_PROXY=http://127.0.0.1:3128
 export HTTP_PROXY
 export HTTPS_PROXY
 export FTP_PROXY
+
+export TK_SUITE_NAME=env_upper

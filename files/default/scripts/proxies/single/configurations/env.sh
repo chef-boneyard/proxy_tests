@@ -7,3 +7,5 @@ ftp_proxy=http://127.0.0.1:3128
 export http_proxy
 export https_proxy
 export ftp_proxy
+
+export TK_SUITE_NAME=env
