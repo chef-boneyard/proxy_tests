@@ -2,8 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  #config.vm.box = "bento/ubuntu-14.04"
-  config.vm.box = "trusty64"
+  config.vm.box = "bento/ubuntu-14.04"
 
   config.vm.synced_folder ".", "/opt/proxy_tests", create: true
   # config.vm.synced_folder "/Users/tball/github/berkshelf", "/opt/berkshelf", create: true
