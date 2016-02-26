@@ -1,5 +1,10 @@
 #!/bin/bash -x
 
+if [ `uname -s` = "Darwin" ]; then
+  echo "This script will not work on OS X. Run it inside the Vagrant VM."
+  exit 1
+fi
+
 dk_version=0.11.2
 deb_file=chefdk_${dk_version}-1_amd64.deb
 
@@ -20,7 +25,8 @@ export PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
 chef-client --version
 chef-client -z -o proxy_tests::render
 
-sudo -E bash $PROXY_TESTS_DIR/run_tests.sh chef_client none no_proxy /tmp/out.txt
+# sudo -E bash $PROXY_TESTS_DIR/run_tests.sh chef_client none no_proxy /tmp/out.txt
+sudo -E bash $PROXY_TESTS_DIR/run_tests.sh install_sh single env
 
 echo "proxy_tests output is in /tmp/out.txt"
 echo "squid logs are in /var/log/squid3"
