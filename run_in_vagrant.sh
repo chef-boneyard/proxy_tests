@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+set -e
+
 if [ `uname -s` = "Darwin" ]; then
   echo "This script will not work on OS X. Run it inside the Vagrant VM."
   exit 1
@@ -23,7 +25,7 @@ export PROXY_TESTS_DIR=/tmp/proxy_tests
 export PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
 
 chef-client --version
-chef-client -z -o proxy_tests::render
+sudo -E chef-client -z -o proxy_tests::render
 
 # sudo -E bash $PROXY_TESTS_DIR/run_tests.sh chef_client none no_proxy /tmp/out.txt
 sudo -E bash $PROXY_TESTS_DIR/run_tests.sh install_sh single env
