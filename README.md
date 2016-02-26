@@ -35,6 +35,10 @@ vagrant ssh -c "/opt/proxy_tests/files/default/scripts/run_tests.sh \* single"
 vagrant ssh -c "/opt/proxy_tests/files/default/scripts/run_tests.sh \* \* env"
 ```
 
+(chef_client|berkshelf|kitchen|install_sh) (single|none) (client_rb|env|env_upper|no_proxy)
+
+`no_proxy` is an odd case: it only works with `none`, because we _don't_ start a proxy on the box, but _do_ set `no_proxy` to equal various domains, and then we try to access those domains, which will only work if we're handling `no_proxy` correctly.
+
 ### Results
 
 The results so far:
