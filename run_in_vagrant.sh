@@ -3,12 +3,11 @@
 dk_version=0.11.2
 deb_file=chefdk_${dk_version}-1_amd64.deb
 
-chef -v 2> /dev/null
-if [ $? != 0 ]; then
+if [ ! -x /opt/chefdk/bin/chef ]; then
   sudo dpkg -i $deb_file 2> /dev/null
 
   if [ $? != 0 ]; then
-    "Couldn't find $deb_file; is it present?"
+    "Couldn't install from $deb_file; is it present?"
     exit 1
   fi
 fi
