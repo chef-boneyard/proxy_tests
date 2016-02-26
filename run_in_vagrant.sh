@@ -18,7 +18,6 @@ export PROXY_TESTS_DIR=/tmp/proxy_tests
 export PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
 
 chef-client --version
-# chef gem install "kitchen-ec2"
 chef-client -z -o proxy_tests::render
 
 sudo -E bash $PROXY_TESTS_DIR/run_tests.sh chef_client none no_proxy /tmp/out.txt
