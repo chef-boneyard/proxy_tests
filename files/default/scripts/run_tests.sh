@@ -14,9 +14,19 @@ echo "Running tests from $PROXY_TESTS_DIR ..."
 . $PROXY_TESTS_DIR/utils.sh
 
 test_is_pending() {
-  echo "test_is_pending [disabled] $1 $2 $3"
-  [[ ( $1 != "install_sh" && $3 == "no_proxy" ) || ( $1 == "install_sh" && $3 == "env_upper" ) || ( $1 == "chef_client" && $2 == "single" && $3 == "env_upper" ) || ( $1 == "install_sh" && $3 == "client_rb" ) ]]
-  false
+  local args="[test=$1 proxy_count=$2 configuration=$3]"
+
+  if [[ ( $1 == "install_sh" && $3 == "env_upper" ) ||
+        ( $1 == "chef_client" && $2 == "single" && $3 == "env_upper" ) ||
+        ( $1 == "install_sh" && $3 == "client_rb" ) ]]; then
+    echo "Combination $args is believed not to work yet."
+    true
+  elif [[ $2 != "none" && $3 == "no_proxy" ]]; then
+    echo "Combination $args doesn't make sense: 'no_proxy' requires 'none'."
+    true
+  else
+    false
+  fi
 }
 
 # Make any failing command fail the whole thing
