@@ -1,5 +1,7 @@
 This repository contains the tests we do to find out whether proxies work with various Chef software. Instructions for doing the various bits:
 
+[![Build Status](https://travis-ci.org/chef/proxy_tests.svg?branch=master)](https://travis-ci.org/chef/proxy_tests)
+
 # OS Variants
 
 ## Vagrant Linux
