@@ -27,8 +27,11 @@ export PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
 chef-client --version
 sudo -E chef-client -z -o proxy_tests::render
 
-sudo -E bash $PROXY_TESTS_DIR/run_tests.sh chef_client none no_proxy
-# sudo -E bash $PROXY_TESTS_DIR/run_tests.sh # install_sh single env
+subject="${1-chef_client}"
+proxy_count="${2-none}"
+proxy_mechanism="${3-no_proxy}"
+
+sudo -E bash $PROXY_TESTS_DIR/run_tests.sh $subject $proxy_count $proxy_mechanism
 
 echo "proxy_tests output is in /tmp/out.txt"
 echo "squid logs are in /var/log/squid3"
