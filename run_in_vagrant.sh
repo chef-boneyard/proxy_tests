@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 set -e
 
@@ -27,8 +27,8 @@ export PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
 chef-client --version
 sudo -E chef-client -z -o proxy_tests::render
 
-# sudo -E bash $PROXY_TESTS_DIR/run_tests.sh chef_client none no_proxy /tmp/out.txt
-sudo -E bash $PROXY_TESTS_DIR/run_tests.sh install_sh single env
+sudo -E bash $PROXY_TESTS_DIR/run_tests.sh chef_client none no_proxy
+# sudo -E bash $PROXY_TESTS_DIR/run_tests.sh # install_sh single env
 
 echo "proxy_tests output is in /tmp/out.txt"
 echo "squid logs are in /var/log/squid3"
