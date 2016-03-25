@@ -1,5 +1,7 @@
 This repository contains the tests we do to find out whether proxies work with various Chef software. Instructions for doing the various bits:
 
+[![Build Status](https://travis-ci.org/chef/proxy_tests.svg?branch=master)](https://travis-ci.org/chef/proxy_tests)
+
 # OS Variants
 
 ## Vagrant Linux
@@ -9,29 +11,43 @@ This repository contains the tests we do to find out whether proxies work with v
 
 # Running Tests
 
-To run all tests, run `run_tests.sh` with no arguments:
+These tests run natively in Travis, and are run continuously from `chef/chef`. The `run_tests.sh` script targets Travis (and does not run inside Vagrant), but this document will assume you're running inside a Vagrant VM, which uses the `run_in_vagrant.sh` script, but takes the same arguments as `run.sh` (though with different defaults).
 
-```ruby
-vagrant ssh -c "sudo /opt/proxy_tests/files/default/run_tests.sh"
+```
+| Test                       | (chef_client|berkshelf|kitchen|install_sh) |
+| Proxies to set up          | (single|none)                              |
+| Proxy configuration source | (client_rb|env|env_upper|no_proxy)         |
+```
+
+By default, this will test `chef_client` with no proxy (`none`) 
+
+```shell
+cd /opt/proxy_tests && ./run_in_vagrant.sh
 ```
 
 To run one test or one set of tests, add arguments of the form `run_tests.sh TEST PROXY CONFIGURATION`. Wildcards are allowed. For example:
 
-```ruby
+```shell
 # Run just the single-proxy install.sh test, with all env variables set
-vagrant ssh -c "sudo /opt/proxy_tests/files/default/run_tests.sh install_sh single env"
+cd /opt/proxy_tests && ./run_in_vagrant.sh install_sh single env
+
 # Run all install_sh tests
-vagrant ssh -c "sudo /opt/proxy_tests/files/default/run_tests.sh install_sh"
+cd /opt/proxy_tests && ./run_in_vagrant.sh install_sh
 ```
 
-```ruby
+```shell
 # Run just the single-proxy install.sh test, with all env variables set
-vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh install_sh single env"
+cd /opt/proxy_tests && ./run_in_vagrant.sh install_sh single env"
+
 # Run all tests against the single-proxy
-vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh \* single"
+cd /opt/proxy_tests && ./run_in_vagrant.sh \* single"
+
 # Run all tests that set all environment variables, no matter what the proxy
-vagrant ssh -c "/opt/proxy_tests/files/default/run_tests.sh \* \* env"
+cd /opt/proxy_tests && ./run_in_vagrant.sh \* \* env"
 ```
+
+
+`no_proxy` is an odd case: it only works with `none`, because we _don't_ start a proxy on the box, but _do_ set `no_proxy` to equal various domains, and then we try to access those domains, which will only work if we're handling `no_proxy` correctly.
 
 ### Results
 

@@ -32,9 +32,13 @@ package "subversion"
 directory '/tmp/test_proxy_dir/couchdb'
 subversion '/tmp/test_proxy_dir/couchdb' do
   repository 'http://svn.apache.org/repos/asf/couchdb/trunk'
-  # The subversion resource doesn't respect env variables right now
-  # TODO fix this
-  action :nothing
+  action :sync
+end
+
+directory '/tmp/test_proxy_dir/style'
+subversion 'style' do
+  repository 'https://svn.code.sf.net/p/astyle/code/trunk/AStyle'
+  action :sync
 end
 
 chef_gem 'retryable' do

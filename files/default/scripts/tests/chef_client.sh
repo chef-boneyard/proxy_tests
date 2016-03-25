@@ -3,6 +3,8 @@
 AUTH_ARGS="-c $PROXY_TESTS_REPO/.chef/knife.rb -u client-creator --key $PROXY_TESTS_REPO/.chef/client-creator.pem"
 TEST_CLIENT_NAME=test_client
 
+env | grep -i proxy | sort
+
 echo "Recreating client and node ..."
 # Destroy existing client/node so they will get re-created
 run_cmd knife node delete $TEST_CLIENT_NAME $AUTH_ARGS -y
