@@ -1,0 +1,7 @@
+{
+  "chef": {
+    "chef_server_url": "https://api.chef.io/organizations/chef_proxy_tests",
+    "client_key": "/opt/proxy_tests/files/default/scripts/repo/.chef/client-creator.pem",
+    "node_name": "client-creator"
+  }
+}
