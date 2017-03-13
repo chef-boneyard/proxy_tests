@@ -47,8 +47,10 @@ vendor/
 .kitchen/
 
 # chef repo stuff
+trusted_certs/
 /nodes/
 /clients/
 
 # place to put tests
 /tests/
+out.txt

@@ -2,7 +2,7 @@
 TESTS="${1:-*}"
 PROXIES="${2:-*}"
 CONFIGURATIONS="${3:-*}"
-RESULTS_FILE=$4
+RESULTS_FILE="${4:-out.txt}"
 
 # Print out header to results file
 [ $RESULTS_FILE ] && (echo "# Test,Proxy,Configuration,Result" > $RESULTS_FILE)
@@ -14,8 +14,8 @@ echo "Running tests from $PROXY_TESTS_DIR ..."
 . $PROXY_TESTS_DIR/utils.sh
 
 test_is_pending() {
-  #echo "test_is_pending $1 $2 $3"
-  [[ ( $1 != "install_sh" && $3 == "no_proxy" ) || ( $1 == "install_sh" && $3 == "env_upper" ) || ( $1 == "chef_client" && $2 == "single" && $3 == "env_upper" ) || ( $1 == "install_sh" && $3 == "client_rb" ) ]]
+  # echo "test_is_pending $1 $2 $3"
+  [[ ( $1 != "berkshelf" && $3 == "no_proxy" ) || ( $1 == "install_sh" && $3 == "env_upper" ) || ( $1 == "chef_client" && $2 == "single" && $3 == "env_upper" ) || ( $1 == "install_sh" && $3 == "client_rb" ) ]]
 }
 
 # Make any failing command fail the whole thing
