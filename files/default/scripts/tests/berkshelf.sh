@@ -18,7 +18,8 @@ run_cmd berks install --berksfile=$BERKSHELF_TESTS_DIR/Berksfile || PROXY_TEST_R
 # We don't need to authenticate successfully, just check to see if we got a 401
 # response. If we get this response it means we connected successfully through
 # the proxy.
-run_cmd berks install --berksfile=$BERKSHELF_TESTS_DIR/Berksfile && berks upload --config=$BERKSHELF_TESTS_DIR/config.json --berksfile=$BERKSHELF_TESTS_DIR/Berksfile | grep HTTPForbidden || PROXY_TEST_RESULT=failed
+echo "This test should throw a 403 Forbidden error which is treated as success"
+run_cmd berks install --berksfile=$BERKSHELF_TESTS_DIR/Berksfile && berks upload --config=$BERKSHELF_TESTS_DIR/config.json --berksfile=$BERKSHELF_TESTS_DIR/Berksfile | grep Forbidden || PROXY_TEST_RESULT=failed
 
 # clean up the home user chef folder so it doesn't conflict with other tests
 run_cmd rm -rf ~/.chef
