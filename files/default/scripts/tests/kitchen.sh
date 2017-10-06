@@ -4,9 +4,6 @@
 cwd=$(pwd)
 cd $PROXY_TESTS_REPO/cookbooks/test
 
-echo "Testing kitchen driver discover ..."
-run_cmd timeout -k 90 -s 9 90 kitchen driver discover || PROXY_TEST_RESULT=failed
-
 echo "Setting up kitchen instances"
 run_cmd kitchen create -c 5 || PROXY_TEST_RESULT=failed
 
