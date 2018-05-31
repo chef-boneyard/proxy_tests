@@ -8,7 +8,8 @@ RESULTS_FILE="${4:-out.txt}"
 [ $RESULTS_FILE ] && (echo "# Test,Proxy,Configuration,Result" > $RESULTS_FILE)
 
 PROXY_TESTS_DIR=$(dirname $0)
-echo "Running tests from $PROXY_TESTS_DIR ..."
+PROXY_TESTS_VERSION="$(git rev-parse HEAD 2>/dev/null || echo '(unknown)')"
+echo "Running proxy tests version $PROXY_TESTS_VERSION from $PROXY_TESTS_DIR ..."
 
 # Bring in the utility functions
 . $PROXY_TESTS_DIR/utils.sh
