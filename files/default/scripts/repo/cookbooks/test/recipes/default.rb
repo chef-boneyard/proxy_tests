@@ -69,6 +69,6 @@ ruby_block "Net::HTTP test" do
     request   = Net::HTTP.new(uri.host, uri.port)
     request.use_ssl = true
     response  = request.get(uri)
-    raise RuntimeError unless response.body =~ /Chef Software, Inc/
+    raise RuntimeError unless response.body.include?('<link rel="canonical" href="https://www.chef.io/" />')
   }
 end
