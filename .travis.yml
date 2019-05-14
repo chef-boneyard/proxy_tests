@@ -8,7 +8,7 @@ addons:
   apt:
     sources:
       # later we can test with current, now we want stable
-      - chef-current-precise
+      - chef-current-trusty
       #- chef-stable-precise
     packages:
       - chefdk
@@ -26,6 +26,7 @@ env:
   global:
     - PROXY_TESTS_DIR=/tmp/proxy_tests
     - PROXY_TESTS_REPO=$PROXY_TESTS_DIR/repo
+    - CHEF_LICENSE=accept-no-persist
 
 script:
   - chef-client --version

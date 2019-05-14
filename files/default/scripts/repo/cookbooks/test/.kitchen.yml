@@ -11,8 +11,8 @@ driver:
     owned_by: proxy_tests - delete me
 
 provisioner:
-  require_chef_omnibus: "12.5.1"
   name: chef_zero
+  product_name: chef
 
 transport:
   ssh_key: ../../.chef/keys/proxy_tests.pem

@@ -3,6 +3,7 @@
 # We must execute the kitchen commands from the cookbook directory
 cwd=$(pwd)
 cd $PROXY_TESTS_REPO/cookbooks/test
+export CHEF_LICENSE="accept-no-persist"
 
 echo "Setting up kitchen instances"
 run_cmd kitchen create -c 5 || PROXY_TEST_RESULT=failed
