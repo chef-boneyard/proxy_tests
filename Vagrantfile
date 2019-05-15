@@ -16,8 +16,9 @@ Vagrant.configure(2) do |config|
   # config.vm.synced_folder "/Users/tduffield/github/chef/ohai", "/opt/ohai", create: true
 
   config.vm.provision "shell", inline: "sudo apt-get update"
-  config.vm.provision "shell", inline: "sudo apt-get -y install squid3 git curl wget vim apache2-utils g++"
-  config.vm.provision "shell", inline: "gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3", privileged: false
+  config.vm.provision "shell", inline: "sudo apt-get -y install squid3 git curl wget vim apache2-utils g++ software-properties-common"
+  config.vm.provision "shell", inline: "sudo apt-add-repository -y ppa:rael-gc/rvm"
+  config.vm.provision "shell", inline: "sudo apt-get update"
+  config.vm.provision "shell", inline: "sudo apt-get -y install rvm"
   config.vm.provision "shell", inline: "sudo htpasswd -b -c /etc/squid3/passwords proxy proxy"
-  config.vm.provision "shell", inline: "curl -sSL https://get.rvm.io | bash -s stable", privileged: true
 end
